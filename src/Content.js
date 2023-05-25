@@ -5,14 +5,13 @@ import ItemList from './ItemList'
 const Content = ({ items, handleCheck, handleDelete }) => {
   return (
     <main className='main'>
-        { items.length ?
+      { items.length ? (        
         <ItemList
             items={items}             
             handleCheck={handleCheck} 
             handleDelete={handleDelete} 
-            />
-            : <p style={{color: 'red'}}>List is empty...</p>
-        }
+            /> ) : ( <p style={{color: 'red'}}>List is empty...</p>
+            )}        
     </main>
   )
 }

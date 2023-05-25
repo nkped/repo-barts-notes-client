@@ -21,11 +21,21 @@ function App() {
   setItems(listItems)
   }
 
+  const addItem = (item) => {
+    const id = items[items.length - 1].id + 1
+    console.log(id)
+    const myNewItem = { id, checked: false, item }
+    console.log(myNewItem)
+    const listItems = [ ...items, myNewItem ]
+    console.log(listItems)
+    setItems(listItems)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(newItem)
+    addItem(newItem)
     setNewItem('')
-
   }
 
 
