@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Content from "./Content";
+import AddItem from "./AddItem";
 
 function App() {
 
+  const [ newItem, setNewItem ] = useState('')
   const [ items, setItems ] = useState([
     { id: 1, checked: false, item: 'Ride my skateboard'},
     { id: 2, checked: false, item: 'Tell Homer to suck my butt'},
@@ -19,11 +21,23 @@ function App() {
   setItems(listItems)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(newItem)
+    setNewItem('')
+
+  }
+
 
 
   return (
     <div className="App">
       <h1>Barts notes app</h1>
+      <AddItem 
+        newItem={newItem} 
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}
+        />
       <Content 
         items={items} 
         handleCheck={handleCheck} 
