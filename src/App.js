@@ -7,14 +7,19 @@ function App() {
   const [ newItem, setNewItem ] = useState('')
   const [ items, setItems ] = useState( JSON.parse(localStorage.getItem('bartslist')) || [])
 
+  const setAndSave = (newItems) => {
+    setItems(newItems)
+    localStorage.setItem('bartslist', JSON.stringify(newItems))
+  }
+
   const handleCheck = (id) => {
-    const listItems = items.map((item) => id === item.id ? { ...item, checked: !item.checked } : item )
-    setItems(listItems)
+    const listItems = items.map((item) => id === item.id ? ({ ...item, checked: !item.checked }) : item )
+    setAndSave(listItems)
   }
 
   const handleDelete = (id) => {
   const listItems = items.filter((item) => item.id !== id)
-  setItems(listItems)
+  setAndSave(listItems)
   }
 
   const addItem = (item) => {
@@ -23,8 +28,8 @@ function App() {
     const myNewItem = { id, checked: false, item }
     console.log(myNewItem)
     const listItems = [ ...items, myNewItem ]
-    console.log(listItems)
-    setItems(listItems)
+    console.log('logging listItems: ', listItems)
+    setAndSave(listItems)
   }
 
   const handleSubmit = (e) => {
