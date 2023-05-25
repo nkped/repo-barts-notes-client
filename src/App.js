@@ -1,16 +1,23 @@
 import { useState } from "react";
 import Content from "./Content";
 import AddItem from "./AddItem";
+import SearchItem from "./SearchItem";
 
 function App() {
 
   const [ newItem, setNewItem ] = useState('')
+  const [ search, setSearch ] = useState('')
   const [ items, setItems ] = useState( JSON.parse(localStorage.getItem('bartslist')) || [])
 
   const setAndSave = (newItems) => {
     setItems(newItems)
     localStorage.setItem('bartslist', JSON.stringify(newItems))
   }
+/* 
+  const searchItem = (e) => {
+    setSearch(e)
+    const listItems = items.filter()
+  } */
 
   const handleCheck = (id) => {
     const listItems = items.map((item) => id === item.id ? ({ ...item, checked: !item.checked }) : item )
@@ -48,8 +55,12 @@ function App() {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
         />
+        <SearchItem
+          search={search} 
+          setSearch={setSearch} 
+          />
       <Content 
-        items={items} 
+        items={items.filter((item) => ( (item.item).includes(search) ))} 
         handleCheck={handleCheck} 
         handleDelete={handleDelete} 
          />
