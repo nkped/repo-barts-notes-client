@@ -13,12 +13,7 @@ function App() {
     setItems(newItems)
     localStorage.setItem('bartslist', JSON.stringify(newItems))
   }
-/* 
-  const searchItem = (e) => {
-    setSearch(e)
-    const listItems = items.filter()
-  } */
-
+  
   const handleCheck = (id) => {
     const listItems = items.map((item) => id === item.id ? ({ ...item, checked: !item.checked }) : item )
     setAndSave(listItems)
@@ -60,11 +55,10 @@ function App() {
           setSearch={setSearch} 
           />
       <Content 
-        items={items.filter((item) => ( (item.item).includes(search) ))} 
+        items={items.filter((item) => ((item.item).includes(search)))} 
         handleCheck={handleCheck} 
         handleDelete={handleDelete} 
-         />
-
+        />
     </div>
   );
 }
