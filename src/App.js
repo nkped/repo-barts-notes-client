@@ -5,11 +5,7 @@ import AddItem from "./AddItem";
 function App() {
 
   const [ newItem, setNewItem ] = useState('')
-  const [ items, setItems ] = useState([
-    { id: 1, checked: false, item: 'Ride my skateboard'},
-    { id: 2, checked: false, item: 'Tell Homer to suck my butt'},
-    { id: 3, checked: true, item: 'Treehouse with Millhouse'}
-  ])
+  const [ items, setItems ] = useState( JSON.parse(localStorage.getItem('bartslist')) || [])
 
   const handleCheck = (id) => {
     const listItems = items.map((item) => id === item.id ? { ...item, checked: !item.checked } : item )
@@ -22,7 +18,7 @@ function App() {
   }
 
   const addItem = (item) => {
-    const id = items[items.length - 1].id + 1
+    const id = items.length ? (items[items.length - 1].id + 1) : 1
     console.log(id)
     const myNewItem = { id, checked: false, item }
     console.log(myNewItem)
@@ -37,7 +33,6 @@ function App() {
     addItem(newItem)
     setNewItem('')
   }
-
 
 
   return (
